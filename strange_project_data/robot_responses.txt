@@ -1,0 +1,5 @@
+{
+      "hello.": ["hi.", "hello.", "it's been a while.", "i missed you."]
+      "hi.":["greetings.", "hey.", "i've been waiting for you."]
+      "who are you?":["i am " + chat_name + ", your chatbot."]
+}
