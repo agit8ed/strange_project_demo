@@ -1,8 +1,8 @@
- self.first_responses = ("I SEE YOU'RE\nNEW HERE.", "WELCOME.", "OVER THERE IS\nYOUR OWN\nCHATBOT.",
+ {first_responses: ("I SEE YOU'RE\nNEW HERE.", "WELCOME.", "OVER THERE IS\nYOUR OWN\nCHATBOT.",
                                 "DOESN'T LOOK\nLIKE MUCH...", "BUT PROVING ME WRONG\nIS YOUR\nRESPONSIBILITY.",
                                 "FIRST, LET'S GIVE IT A NAME.")
-self.name_picked_responses = [chat_name + ".", "A FINE NAME.", "NOW...", "LET US BEGIN."]  # add more text
-self.robot_activated = ["HERE IT IS.", chat_name + " IS LIKE YOUR VERY OWN PET.",
+   name_picked_responses: [chat_name + ".", "A FINE NAME.", "NOW...", "LET US BEGIN."]  # add more text
+   robot_activated: ["HERE IT IS.", chat_name + " IS LIKE YOUR VERY OWN PET.",
                                 "THE DIFFERENCE IS THAT YOU\nDON'T NEED TO TAKE CARE OF IT\nAS MUCH.",
                                 "LET'S TRY TALKING TO IT."]
-self.talked_to_robot = ["IT DOESN'T KNOW MUCH YET.", "TEACH IT ALL SORTS OF NEW PHRASES!"]
+   talked_to_robot: ["IT DOESN'T KNOW MUCH YET.", "TEACH IT ALL SORTS OF NEW PHRASES!"]}

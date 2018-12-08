@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import (QWidget, QHBoxLayout,
                              QPlainTextEdit)
 from PyQt5.QtGui import QPixmap
 import random
+import json
 
 
 passive_i = 0
@@ -11,6 +12,9 @@ chat_name = ""
 dialogue_over_flag = False
 name_entry_flag = False
 first_robot_startup_flag = False
+
+with open("robot_responses.json") as robot_responses:
+    robot_speak = json.loads(robot_responses)
 
 class Example(QWidget):
 
@@ -70,6 +74,12 @@ class Example(QWidget):
         self.gif_button.hide()
         self.gif_button.clicked.connect(self.picture_change)
 
+        self.send_button = QPushButton(self)
+        self.send_button.hide()
+        self.send_button.move(375, 340)
+        self.send_button.setFixedSize(30, 30)
+        self.send_button.clicked.connect(self.talk_to_it)
+
         # buttons for interactions with chatbot go here
 
         # chatbot dialogue and ways to talk to it go here
@@ -126,13 +136,17 @@ class Example(QWidget):
                 self.robot_chatbox.setText("hello.")
                 self.robot_user.show()
                 self.next_button.hide()
-
-    def keyPressEvent(self, event):
-        if event.key() == Qt.Key_Enter:
-            pass
+                self.send_button.show()
 
     def talk_to_it(self):  # the main feature
-        pass
+        global temporary_dict
+        if self.robot_user.text() in robot_speak.keys():
+            self.robot_chatbox.setText(robot_speak[self.robot_user.text()])
+        else:
+            with open("robot_responses.json", "w"):
+                json.dumps(self.robot_user.text(), self.robot_chatbox.text())
+            '''with open("robot_responses_backup.txt", "w") as write_this:
+                write_this.write(str(self.robot_user.text(), self.robot_chatbox.text()))'''
 
     def play_with_it(self):  # the Tamagotchi aspect
         pass
