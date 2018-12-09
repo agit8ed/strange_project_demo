@@ -1,1 +1,9 @@
-{"hello.": ["hi.", "hello.", "it's been a while.", "i missed you."], "hi.":["greetings.", "hey.", "i've been waiting for you."], "who are you?":["i am your chatbot."]}
+hi.
+hello.
+it's been a while.
+i missed you.
+greetings.
+hey.
+i've been waiting for you.
+who are you?
+i am completely sentient.

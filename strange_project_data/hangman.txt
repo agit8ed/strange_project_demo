@@ -1,0 +1,7 @@
+fox
+robot
+talk
+chat
+destroy
+dog
+cat
