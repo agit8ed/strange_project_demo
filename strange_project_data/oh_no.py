@@ -109,13 +109,13 @@ class ChatBot_v1(QWidget):  # DON'T MESS WITH IT.
         self.gif_button.hide()
         self.gif_button.clicked.connect(self.picture_change)
 
-        self.send_button = QPushButton(self)
+        self.send_button = QPushButton(">", self)
         self.send_button.hide()
         self.send_button.move(375, 340)
         self.send_button.setFixedSize(30, 30)
         self.send_button.clicked.connect(self.talk_to_it)
 
-        self.send_button_copy = QPushButton(self)
+        self.send_button_copy = QPushButton(">", self)
         self.send_button_copy.hide()
         self.send_button_copy.move(375, 340)
         self.send_button_copy.setFixedSize(30, 30)
