@@ -257,11 +257,13 @@ class ChatBot_v1(QWidget):  # DON'T MESS WITH IT.
                 if self.robot_user.text()[-1] == "?":
                     if self.robot_user.text() not in robot_responses:
                         self.robot_chatbox.setText(("i don't know, " + self.robot_user.text()).lower())
+                        robot_new_responses.write(("\n" + self.robot_user.text()).lower())
                         robot_new_responses.write(("\n" + "i don't know, " + self.robot_user.text()).lower())
                     else:
                         try:
                             self.robot_chatbox.setText(robot_responses
-                                                       [robot_responses.index("i don't know" + self.robot_user.text()) + 1])
+                                                       [robot_responses.index("i don't know, " +
+                                                                              self.robot_user.text().lower()) + 1])
                         except IndexError:
                             self.robot_chatbox.setText("...")
                 elif self.robot_user.text()[-1] not in ".,!~":
