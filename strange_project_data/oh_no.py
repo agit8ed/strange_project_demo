@@ -27,24 +27,24 @@ saved_data = open("saved_data.txt").read().split("\n")
 chat_name = saved_data[0]
 flag_data = saved_data[1:]
 for i in range(len(flag_data)):
-    if flag_data[i] == False:
+    if flag_data[i] == "False":
         flag_mass[i] = not bool(flag_data[i])
     else:
         flag_mass[i] = bool(flag_data[i])
 name_entry_flag, first_robot_startup_flag, first_robot_talk_flag, starting_dialogue_clear_flag = flag_mass[0], flag_mass[1], flag_mass[2], flag_mass[3]
 for i in flag_data:
     if "False" in i:
-        save_data = open("saved_data.txt", "w")
+        save_data = open("saved_data.txt", "w")  # DATA SHENANIGANS.
 
 
-class ChatBot_v1(QWidget):
+class ChatBot_v1(QWidget):  # DON'T MESS WITH IT.
 
     def __init__(self):
         super().__init__()
 
         self.initUI()
 
-    def initUI(self):
+    def initUI(self):  # THE DIVINE CREATION.
         global chat_name
         self.first_responses = ("I SEE YOU'RE\nNEW HERE.", "WELCOME.", "OVER THERE IS\nYOUR OWN\nCHATBOT.",
                                 "DOESN'T LOOK\nLIKE MUCH...", "BUT PROVING ME WRONG\nIS YOUR\nRESPONSIBILITY.",
@@ -121,7 +121,7 @@ class ChatBot_v1(QWidget):
         self.send_button_copy.setFixedSize(30, 30)
         self.send_button_copy.clicked.connect(self.send_letter)
 
-        # buttons for interactions with chatbot go here
+        # CHATBOT INERACTIONS.
         self.talk_button = QPushButton("TALK", self)
         self.talk_button.move(0, 340)
         self.talk_button.hide()
@@ -140,7 +140,7 @@ class ChatBot_v1(QWidget):
         self.exit_button.clicked.connect(self.exit_it)
         self.button_mass = [self.talk_button, self.play_button, self.reset_button, self.exit_button]
 
-        # chatbot dialogue and ways to talk to it go here
+        # CHATBOT DIALOGUE.
         self.robot_chatbox = QLabel(self)
         self.robot_chatbox.setMinimumSize(200, 50)
         self.robot_chatbox.move(275, 305)
@@ -170,10 +170,8 @@ class ChatBot_v1(QWidget):
             dialogue_over_flag = True
 
     def default_robot(self):
-        if self.robot_chatbox.isVisible() and self.robot_user.isVisible()\
-                and (self.send_button.isVisible() or self.send_button_copy.isVisible()):
-            self.hide_chat()
-            self.stop_button.hide()
+        self.hide_chat()
+        self.stop_button.hide()
         self.next_button.hide()
         self.show_four_buttons()
         self.dialogue_label.setText("WHAT DO YOU WANT TO DO WITH " + chat_name + "?")
@@ -182,57 +180,57 @@ class ChatBot_v1(QWidget):
         global dialogue_over_flag, starting_dialogue_clear_flag
         global destroy_flag
         global save_data
-        if starting_dialogue_clear_flag is False:
-            if name_entry_flag is False:
-                if dialogue_over_flag is True:
-                    self.next_button.setDisabled(True)
-                    self.confirm_button.setDisabled(False)
-                    self.confirm_button.show()
-                    self.name_entry.setDisabled(False)
-                    self.name_entry.show()
-                    dialogue_over_flag = False
-                else:
-                    self.advance_text(self.first_responses)
-            elif first_robot_startup_flag is False:
-                if dialogue_over_flag is True:
-                    for i in range(len(self.robo_animations) + 1):  # figure out how to animate
-                        self.gif_button.click()
-                        self.dialogue_label.setText("STARTING UP...")
-                    dialogue_over_flag = False
-                    self.next_button.show()
-                else:
-                    self.advance_text(self.name_picked_responses)
-                    self.next_button.show()
-            elif first_robot_talk_flag is False:
-                if dialogue_over_flag is False:
-                    self.advance_text(self.robot_activated)
-                else:
-                    self.show_chat()
-                    self.robot_chatbox.setText("hello.")
-                    self.next_button.hide()
-                    dialogue_over_flag = False
-            elif destroy_flag is False:
-                if dialogue_over_flag is False:
-                    self.advance_text(self.talked_to_robot)
-                else:
-                    try:
-                        starting_dialogue_clear_flag = True
-                        dialogue_over_flag = True
-                        save_data.write(chat_name + "\n" + str(name_entry_flag) + "\n" + str(first_robot_startup_flag) + "\n" + str(first_robot_talk_flag) + "\n" + str(starting_dialogue_clear_flag))
-                        self.default_robot()
-                    except Exception as e:
-                        print(e)
+        if destroy_flag is False:
+            if starting_dialogue_clear_flag is False:
+                if name_entry_flag is False:
+                    if dialogue_over_flag is True:
+                        self.next_button.setDisabled(True)
+                        self.confirm_button.setDisabled(False)
+                        self.confirm_button.show()
+                        self.name_entry.setDisabled(False)
+                        self.name_entry.show()
+                        dialogue_over_flag = False
+                    else:
+                        self.advance_text(self.first_responses)
+                elif first_robot_startup_flag is False:
+                    if dialogue_over_flag is True:
+                        for i in range(len(self.robo_animations) + 1):  # figure out how to animate
+                            self.gif_button.click()
+                            self.dialogue_label.setText("STARTING UP...")
+                        dialogue_over_flag = False
+                        self.next_button.show()
+                    else:
+                        self.advance_text(self.name_picked_responses)
+                        self.next_button.show()
+                elif first_robot_talk_flag is False:
+                    if dialogue_over_flag is False:
+                        self.advance_text(self.robot_activated)
+                    else:
+                        self.show_chat()
+                        self.robot_chatbox.setText("hello.")
+                        self.next_button.hide()
+                        dialogue_over_flag = False
+                else :
+                    if dialogue_over_flag is False:
+                        self.advance_text(self.talked_to_robot)
+                    else:
+                        try:
+                            starting_dialogue_clear_flag = True
+                            dialogue_over_flag = False
+                            save_data.write(chat_name + "\n" + str(name_entry_flag) + "\n" + str(first_robot_startup_flag) +
+                                            "\n" + str(first_robot_talk_flag) + "\n" + str(starting_dialogue_clear_flag))
+                            self.default_robot()
+                        except Exception as e:
+                            print(e)
             else:
-                if dialogue_over_flag is False:
-                    self.advance_text(self.robot_destroyed)
-                else:
-                    destroy_flag = False
-                    self.flag_checks()
-
+                for i in range(len(self.robo_animations)):
+                    self.picture_change()
+                self.default_robot()
         else:
-            for i in range(len(self.robo_animations)):
-                self.picture_change()
-            self.default_robot()
+            if dialogue_over_flag is False:
+                self.advance_text(self.robot_destroyed)
+            else:
+                self.dialogue_label.setText("CLOSE THE APPLICATION.")
 
     def show_four_buttons(self):
         for i in range(len(self.button_mass)):
@@ -300,7 +298,7 @@ class ChatBot_v1(QWidget):
         print(guess_string)
 
     def destroy_it(self):  # reset button
-        '''global name_entry_flag, first_robot_startup_flag, first_robot_talk_flag, starting_dialogue_clear_flag
+        global name_entry_flag, first_robot_startup_flag, first_robot_talk_flag, starting_dialogue_clear_flag
         global destroy_flag
         global chat_name
         name_entry_flag = False
@@ -308,19 +306,21 @@ class ChatBot_v1(QWidget):
         first_robot_talk_flag = False
         starting_dialogue_clear_flag = False
         chat_name = ""
+        self.hide_four_buttons()
         with open("saved_data.txt", "w") as save_data:
             save_data.write(chat_name + "\n" + str(name_entry_flag) + "\n" + str(first_robot_startup_flag)
                             + "\n" + str(first_robot_talk_flag) + "\n" + str(starting_dialogue_clear_flag))
         with open("robot_responses.txt", "w") as robot_goodbyes:
-            with open("robot_responses_backup.txt").read() as memory_wipe:
-                robot_goodbyes.write(memory_wipe)
+            with open("robot_responses_backup.txt") as memory_wipe:
+                robot_goodbyes.write(memory_wipe.read())
         with open("hangman.txt", "w") as first_hang:
-            with open("hangman_backup.txt").read() as last_hang:
-                first_hang.write(last_hang)
+            with open("hangman_backup.txt") as last_hang:
+                first_hang.write(last_hang.read())
         self.dialogue_label.setText("...")
         self.lbl.setPixmap(QPixmap("robot_starting.png"))
         self.next_button.show()
-        destroy_flag = True'''
+        destroy_flag = True
+        self.flag_checks()
         pass
 
     def exit_it(self):  # implement saving
@@ -374,6 +374,7 @@ class ChatBot_v1(QWidget):
         self.send_button_copy.hide()
         self.hangman_label.setPixmap(QPixmap("hangman_none.png"))
         self.hangman_label.hide()
+        self.stop_button.hide()
 
     def confirm_name(self):
         global chat_name
