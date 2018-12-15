@@ -111,13 +111,13 @@ class ChatBot_v1(QWidget):  # DON'T SCREW ME OVER.
         self.gif_button.hide()
         self.gif_button.clicked.connect(self.picture_change)
 
-        self.send_button = QPushButton(self)
+        self.send_button = QPushButton(">", self)
         self.send_button.hide()
         self.send_button.move(375, 340)
         self.send_button.setFixedSize(30, 30)
         self.send_button.clicked.connect(self.talk_to_it)
 
-        self.send_button_copy = QPushButton(self)
+        self.send_button_copy = QPushButton(">", self)
         self.send_button_copy.hide()
         self.send_button_copy.move(375, 340)
         self.send_button_copy.setFixedSize(30, 30)
@@ -229,7 +229,8 @@ class ChatBot_v1(QWidget):  # DON'T SCREW ME OVER.
                         try:
                             starting_dialogue_clear_flag = True
                             dialogue_over_flag = False
-                            save_data.write(chat_name + "\n" + str(name_entry_flag) + "\n" + str(first_robot_startup_flag) + "\n" + str(first_robot_talk_flag) + "\n" + str(starting_dialogue_clear_flag))
+                            with open("saved_data.txt", "w") as save_data:
+                                save_data.write(chat_name + "\n" + str(name_entry_flag) + "\n" + str(first_robot_startup_flag) + "\n" + str(first_robot_talk_flag) + "\n" + str(starting_dialogue_clear_flag))
                             self.default_robot()
                         except Exception as e:
                             print(e)
@@ -302,6 +303,7 @@ class ChatBot_v1(QWidget):  # DON'T SCREW ME OVER.
         self.show_chat()
         self.send_button.hide()
         self.send_button_copy.show()
+        self.send_button_copy.setDisabled(False)
         self.suggest_button.show()
         self.hangman_label.show()
         self.dialogue_label.setText("YOU'RE PLAYING HANGMAN.")
