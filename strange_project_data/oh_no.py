@@ -267,14 +267,14 @@ class ChatBot_v1(QWidget):  # DON'T SCREW ME OVER.
             if self.robot_user.text() not in robot_responses and self.robot_user.text() + "." not in robot_responses\
                     and self.robot_user.text().lower() not in robot_responses:
                 if self.robot_user.text()[-1] == "?":
-                    if "i don't know, " + self.robot_user.text() not in robot_responses:
+                    if "i don't know, " + self.robot_user.text().lower() not in robot_responses:
                         self.robot_chatbox.setText(("i don't know, " + self.robot_user.text()).lower())
                         robot_new_responses.write("\n" + self.robot_user.text().lower())
                         robot_new_responses.write(("\n" + "i don't know, " + self.robot_user.text()).lower())
-                    elif "i don't know, " + self.robot_user.text() in robot_responses:
+                    elif "i don't know, " + self.robot_user.text().lower() in robot_responses:
                         try:
                             self.robot_chatbox.setText(robot_responses
-                                                       [robot_responses.index("i don't know, " + self.robot_user.text()) + 1])
+                                                       [robot_responses.index("i don't know, " + self.robot_user.text().lower()) + 1])
                         except IndexError:
                             self.robot_chatbox.setText("...")
                 elif self.robot_user.text()[-1] not in ".,!~":
@@ -355,8 +355,8 @@ class ChatBot_v1(QWidget):  # DON'T SCREW ME OVER.
         print(len(self.hangman_label.text()))
         i_count = 0
         if len(self.robot_user.text()) <= 1:
-            if self.robot_user.text() in guess_this and self.robot_user.text() != "":
-                for i in self.robot_user.text():
+            if self.robot_user.text().lower() in guess_this and self.robot_user.text() != "":
+                for i in self.robot_user.text().lower():
                     for j in range(len(guess_this)):
                         if guess_this[j] == i:
                             guess_string[j] = i
@@ -367,7 +367,7 @@ class ChatBot_v1(QWidget):  # DON'T SCREW ME OVER.
                 if i_count == 0:
                     self.dialogue_label.setText("YOU WIN!")
                     self.send_button_copy.setDisabled(True)
-            else:
+            elif self.robot_user.text().lower() not in guess_this and self.robot_user.text() != "":
                 if passive_i < len(self.hangman_animations) - 1:
                     print(self.hangman_animations[passive_i])
                     self.hangman_label.setPixmap(QPixmap(self.hangman_animations[passive_i]))
